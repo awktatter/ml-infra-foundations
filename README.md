@@ -1,2 +1,9 @@
 # ml-infra-foundations
-Learning repo for ML Infra stuff
+
+Learning repository which covers ML infrastructure concepts in a hands-on manner
+
+** Current Status:** Work in progress
+
+## License
+
+MIT
