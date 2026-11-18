@@ -1,0 +1,2 @@
+date,drill,minutes,passed_first_try,mistakes,remember
+2026-11-18,1: stable softmax and cross-entropy,120,n,"Wrote asserts but did not run them early; overflow on [1000 1001 1002] until max subtraction was added to softmax and log_softmax; used blogs and Stack Overflow (outside docs-only rule); cross_entropy not finished in time and needed a reference implementation","Run each test as soon as it is written; subtract the max in softmax and log_softmax; pick per-row target entries with arr[np.arange(N), targets]; loss = mean of negative log-probability of the correct class"
