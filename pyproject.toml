@@ -8,6 +8,7 @@ authors = [
 ]
 requires-python = ">=3.14"
 dependencies = [
+    "matplotlib>=3.11.2",
     "numpy>=2.5.5",
     "pre-commit>=4.7.0",
     "pytest>=9.2.0",
@@ -24,3 +25,17 @@ build-backend = "uv_build"
 
 [tool.uv.build-backend]
 module-name = "foundations"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+
+[tool.pytest.ini_options]
+markers = [
+    "smoke: quick sanity checks that the environment works",
+]
+
+[dependency-groups]
+dev = [
+    "jupyter>=1.1.1",
+]
