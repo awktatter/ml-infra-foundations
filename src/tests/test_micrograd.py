@@ -3,8 +3,9 @@ import torch
 
 from foundations.micrograd.engine import Value
 
+# approx uses max(rel*|expected|, abs), so abs must be as tight as rel; float64 gives ~1e-16.
 TOLERANCE_REL = 1e-12
-TOLERANCE_ABS = 1e-6
+TOLERANCE_ABS = 1e-12
 
 
 def test_gradient_vs_pytorch():
@@ -15,16 +16,11 @@ def test_gradient_vs_pytorch():
     w2 = Value(1.0)
     b = Value(6.8813735870195432)
 
-    p_x1 = torch.Tensor([2.0]).double()
-    p_x1.requires_grad = True
-    p_x2 = torch.Tensor([0.0]).double()
-    p_x2.requires_grad = True
-    p_w1 = torch.Tensor([-3.0]).double()
-    p_w1.requires_grad = True
-    p_w2 = torch.Tensor([1.0]).double()
-    p_w2.requires_grad = True
-    p_b = torch.Tensor([6.8813735870195432]).double()
-    p_b.requires_grad = True
+    p_x1 = torch.tensor([2.0], dtype=torch.float64, requires_grad=True)
+    p_x2 = torch.tensor([0.0], dtype=torch.float64, requires_grad=True)
+    p_w1 = torch.tensor([-3.0], dtype=torch.float64, requires_grad=True)
+    p_w2 = torch.tensor([1.0], dtype=torch.float64, requires_grad=True)
+    p_b = torch.tensor([6.8813735870195432], dtype=torch.float64, requires_grad=True)
 
     # Test
     n = x1 * w1 + x2 * w2 + b
@@ -67,8 +63,7 @@ def test_gradient_vs_pytorch():
 def test_micrograd_div_vs_pytorch():
     # Arrange
     a = Value(1 / 3)
-    p_a = torch.Tensor([1 / 3]).double()
-    p_a.requires_grad = True
+    p_a = torch.tensor([1 / 3], dtype=torch.float64, requires_grad=True)
 
     # Test
     o = 1 / a
